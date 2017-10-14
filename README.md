@@ -17,6 +17,7 @@ parsed, and one to signify that an error occured. She will also
 export a function which serves as the API to those action creators.
 
 ```
+// actions.js
 const fetchFriendsRequest = user => ({
     type: 'FETCH_FRIENDS_REQUEST',
     user
@@ -34,12 +35,12 @@ const fetchFriendsFailure = ({ user, error }) => ({
     error
 })
 
+// api.js
 export const fetchFriends = user => {
     return dispatch => {
-
         dispatch(fetchFriendsRequest(user))
-
-        return fetch('/api/' + user + '/friends/')
+        return 
+            fetch('/api/' + user + '/friends/')
             .then(response => response.json())
             .then(
                 friends => dispatch(fetchFriendsSuccess({
@@ -111,7 +112,7 @@ export const fetchFriends = Fetcher(
 
 ## Expecting responses which aren't JSON
 
-Suppose the developer now expects her /api/\<user\>/friends/ endpoint
+Suppose the developer now expects her /api/<user>/friends/ endpoint
 to return data in some sort of binary format. `responseType` solves
 this problem:
 
