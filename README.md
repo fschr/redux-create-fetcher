@@ -134,11 +134,11 @@ endpoint. A typical scenario would be that she wishes to create
 a mugshot from data associated with a user and store this
 created image in the redux store. This requires using the
 `image.onload` callback, rather than immediately dispatching a
-a success action containing a response from her endpoint.
+success action containing a response from her endpoint.
 `deferredSuccess` and `dispatchSuccessAction` solve this problem:
 
 ```
-export const fetchTileImage = Fetcher(
+export const fetchFriends = Fetcher(
     'FETCH_FRIENDS',
     dispatchSuccessAction => ({
         fetchURLFunc: user => ('/api/' + user + '/mugshot/'),
