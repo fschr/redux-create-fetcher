@@ -51,12 +51,15 @@ const Fetcher = (actionPrefix, {
                     if (typeof result.then === 'function') {
                         result
                             .then(result => dispatchSuccessAction({ result, response }))
-                            .catch(error => dispatchFailureAction({ error, response }))
+                            .catch(error => dispatchFailureAction({ error: error.toString(), response }))
                     } else {
                         dispatchSuccessAction({ result, response })
                     }
                 })
-                .catch(error => dispatchFailureAction({ error, response: undefined }))
+                .catch(error => dispatchFailureAction({
+                    error: error.toString(),
+                    response: 'no response (request failed)'
+                }))
         }
     }
 }
