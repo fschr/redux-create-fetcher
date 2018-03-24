@@ -1,29 +1,33 @@
 {
-  "name": "redux-create-fetcher",
-  "version": "1.0.6",
-  "description": "A package for writing boilerplate-free action creators which fetch things.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fschr/redux-create-fetcher.git"
-  },
-  "keywords": [
-    "redux",
-    "fetch",
-    "react",
-    "action",
-    "macro"
-  ],
-  "author": "Thomas Fischer <thomasfischer@fastmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fschr/redux-create-fetcher/issues"
-  },
-  "homepage": "https://github.com/fschr/redux-create-fetcher#readme",
-  "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0"
-  }
+    "name": "redux-create-fetcher",
+    "version": "1.0.7",
+    "description": "A package for writing boilerplate-free action creators which fetch things.",
+    "main": "index.js",
+    "scripts": {
+        "build": "babel lib.js -o index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/fschr/redux-create-fetcher.git"
+    },
+    "keywords": [
+        "redux",
+        "fetch",
+        "react",
+        "action",
+        "macro"
+    ],
+    "author": "Thomas Fischer <thomasfischer@fastmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/fschr/redux-create-fetcher/issues"
+    },
+    "homepage": "https://github.com/fschr/redux-create-fetcher#readme",
+    "devDependencies": {
+        "babel-plugin-transform-object-rest-spread": "^6.26.0"
+    },
+    "dependencies": {
+        "babel-preset-env": "^1.6.1"
+    }
 }
