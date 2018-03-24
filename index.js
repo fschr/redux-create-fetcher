@@ -11,26 +11,24 @@ const Fetcher = (actionPrefix, {
         key
     })
 
-    const successAction = ({ key, result, response }) => ({
+    const successAction = ({ key, result }) => ({
         type: actionPrefix + '_SUCCESS',
         key,
-        result,
-        response
+        result
     })
 
-    const failureAction = ({ key, error, response }) => ({
+    const failureAction = ({ key, error }) => ({
         type: actionPrefix + '_FAILURE',
         key,
-        error,
-        response
+        error
     })
 
 
     return key => {
         return dispatch => {
 
-            const dispatchSuccessAction = ({ result, response }) => dispatch(successAction({ key, result, response }))
-            const dispatchFailureAction = ({ error, response }) => dispatch(failureAction({ key, error, response }))
+            const dispatchSuccessAction = stuff => dispatch(successAction({ ...stuff, key }))
+            const dispatchFailureAction = stuff => dispatch(failureAction({ ...stuff, key }))
 
             if (typeof actionPrefix !== 'string' ||
                 typeof fetchURLFunc !== 'function') {
@@ -45,21 +43,23 @@ const Fetcher = (actionPrefix, {
 	    dispatch(requestAction(key));
 
 	    return fetch(fetchURLFunc(key), fetchOptionsFunc(key))
-                .then(response => { value: response[responseType](), response })
-                .then( ({ value, response }) => {
+                .then(response => {
+                    value: response[responseType](),
+                    status: response.status,
+                    statusText: response.statusText,
+                    ok: response.ok
+                })
+                .then({ value, ...stuff } => {
                     let result = parseResponse(value);
                     if (typeof result.then === 'function') {
                         result
-                            .then(result => dispatchSuccessAction({ result, response }))
-                            .catch(error => dispatchFailureAction({ error: error.toString(), response }))
+                            .then(result => dispatchSuccessAction({ ...stuff, result }))
+                            .catch(error => dispatchFailureAction({ error: error.toString(), ...stuff }))
                     } else {
-                        dispatchSuccessAction({ result, response })
+                        dispatchSuccessAction({ ...stuff, result })
                     }
                 })
-                .catch(error => dispatchFailureAction({
-                    error: error.toString(),
-                    response: 'no response (request failed)'
-                }))
+                .catch(error => dispatchFailureAction({ error: error.toString() }))
         }
     }
 }

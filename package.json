@@ -1,6 +1,6 @@
 {
   "name": "redux-create-fetcher",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A package for writing boilerplate-free action creators which fetch things.",
   "main": "index.js",
   "scripts": {
@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/fschr/redux-create-fetcher/issues"
   },
-  "homepage": "https://github.com/fschr/redux-create-fetcher#readme"
+  "homepage": "https://github.com/fschr/redux-create-fetcher#readme",
+  "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+  }
 }
