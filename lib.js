@@ -11,16 +11,18 @@ const Fetcher = (actionPrefix, {
         key
     })
 
-    const successAction = ({ key, result }) => ({
+    const successAction = ({ key, result, ...stuff }) => ({
         type: actionPrefix + '_SUCCESS',
         key,
-        result
+        result,
+        ...stuff
     })
 
-    const failureAction = ({ key, error }) => ({
+    const failureAction = ({ key, error, ...stuff }) => ({
         type: actionPrefix + '_FAILURE',
         key,
-        error
+        error,
+        ...stuff
     })
 
 
@@ -54,12 +56,12 @@ const Fetcher = (actionPrefix, {
                     if (typeof result.then === 'function') {
                         result
                             .then(result => dispatchSuccessAction({ ...stuff, result }))
-                            .catch(error => dispatchFailureAction({ error: error.toString(), ...stuff }))
+                            .catch(error => dispatchFailureAction({  ...stuff, error: error.toString() }))
                     } else {
                         dispatchSuccessAction({ ...stuff, result })
                     }
                 })
-                .catch(error => dispatchFailureAction({ error: error.toString() }))
+                .catch(error => dispatchFailureAction({ ...stuff, error: error.toString() }))
         }
     }
 }

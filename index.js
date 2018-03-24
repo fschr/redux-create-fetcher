@@ -15,17 +15,27 @@ const Fetcher = (actionPrefix, {
         key
     });
 
-    const successAction = ({ key, result }) => ({
-        type: actionPrefix + '_SUCCESS',
-        key,
-        result
-    });
+    const successAction = _ref => {
+        let { key, result } = _ref,
+            stuff = _objectWithoutProperties(_ref, ['key', 'result']);
 
-    const failureAction = ({ key, error }) => ({
-        type: actionPrefix + '_FAILURE',
-        key,
-        error
-    });
+        return _extends({
+            type: actionPrefix + '_SUCCESS',
+            key,
+            result
+        }, stuff);
+    };
+
+    const failureAction = _ref2 => {
+        let { key, error } = _ref2,
+            stuff = _objectWithoutProperties(_ref2, ['key', 'error']);
+
+        return _extends({
+            type: actionPrefix + '_FAILURE',
+            key,
+            error
+        }, stuff);
+    };
 
     return key => {
         return dispatch => {
@@ -45,17 +55,17 @@ const Fetcher = (actionPrefix, {
                 status: response.status,
                 statusText: response.statusText,
                 ok: response.ok
-            })).then(_ref => {
-                let { value } = _ref,
-                    stuff = _objectWithoutProperties(_ref, ['value']);
+            })).then(_ref3 => {
+                let { value } = _ref3,
+                    stuff = _objectWithoutProperties(_ref3, ['value']);
 
                 let result = parseResponse(value);
                 if (typeof result.then === 'function') {
-                    result.then(result => dispatchSuccessAction(_extends({}, stuff, { result }))).catch(error => dispatchFailureAction(_extends({ error: error.toString() }, stuff)));
+                    result.then(result => dispatchSuccessAction(_extends({}, stuff, { result }))).catch(error => dispatchFailureAction(_extends({}, stuff, { error: error.toString() })));
                 } else {
                     dispatchSuccessAction(_extends({}, stuff, { result }));
                 }
-            }).catch(error => dispatchFailureAction({ error: error.toString() }));
+            }).catch(error => dispatchFailureAction(_extends({}, stuff, { error: error.toString() })));
         };
     };
 };
