@@ -61,7 +61,7 @@ const Fetcher = (actionPrefix, {
                         dispatchSuccessAction({ ...stuff, result })
                     }
                 })
-                .catch(error => dispatchFailureAction({ ...stuff, error: error.toString() }))
+                .catch(error => dispatchFailureAction({ error: error.toString() }))
         }
     }
 }

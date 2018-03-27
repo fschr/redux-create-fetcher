@@ -65,7 +65,7 @@ const Fetcher = (actionPrefix, {
                 } else {
                     dispatchSuccessAction(_extends({}, stuff, { result }));
                 }
-            }).catch(error => dispatchFailureAction(_extends({}, stuff, { error: error.toString() })));
+            }).catch(error => dispatchFailureAction({ error: error.toString() }));
         };
     };
 };
