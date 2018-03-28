@@ -1,6 +1,6 @@
 {
     "name": "redux-create-fetcher",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "A package for writing boilerplate-free action creators which fetch things.",
     "main": "index.js",
     "scripts": {
@@ -28,6 +28,7 @@
         "babel-plugin-transform-object-rest-spread": "^6.26.0"
     },
     "dependencies": {
+        "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
         "babel-preset-env": "^1.6.1"
     }
 }
